@@ -1,12 +1,18 @@
 version: "3"
 
 services:
-  app:
-    build: ./src
+  service:
+    build: ./src/service
+    volumes:
+      - ./src/service:/app
     ports:
       - "3000:3000"
       - "7000:7000"
-    command:
-      - node
-      - "--inspect-brk=0.0.0.0:7000"
-      - "."
+    command: npm run debug
+  web:
+    build: ./src/web
+    volumes:
+      - ./src/web:/app
+    ports:
+      - "3001:3001"
+      - "7001:7001"
